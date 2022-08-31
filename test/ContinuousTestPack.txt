@@ -1,1 +1,4 @@
-TestHello.hpp
+TestCellSortingLiteratePaper.hpp
+TestCylindricalCryptLiteratePaper.hpp
+TestDeltaNotchLiteratePaper.hpp
+TestMorphogenMonolayerLiteratePaper.hpp
