@@ -1,4 +1,4 @@
-# 
+# Cell Based Comparison 2017
 
 This repository contains the code used to produce results in the following paper:
 [Comparing individual-based approaches to modelling the self-organization of multicellular tissues](https://doi.org/10.1371/journal.pcbi.1005387)
