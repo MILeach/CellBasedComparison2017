@@ -65,10 +65,18 @@
 
 /*
  *  This is where you can set parameters to be used in all the simulations.
+ *
+ *  The first block (commented out) are the original parameter values.
+ *  The second block are parameters for a much shorter simulation, and are used for continuous testing with Chaste.
  */
 
-static const double M_TIME_TO_STEADY_STATE = 10; //10
-static const double M_TIME_FOR_SIMULATION = 100; //100
+//static const double M_TIME_TO_STEADY_STATE = 10; //10
+//static const double M_TIME_FOR_SIMULATION = 100; //100
+//static const double M_NUM_CELLS_ACROSS = 20; //20 // this ^2 cells
+//static const double M_CELL_FLUCTUATION = 1.0;
+
+static const double M_TIME_TO_STEADY_STATE = 10.0; //10
+static const double M_TIME_FOR_SIMULATION = 11.0; //100
 static const double M_NUM_CELLS_ACROSS = 20; //20 // this ^2 cells
 static const double M_CELL_FLUCTUATION = 1.0;
 

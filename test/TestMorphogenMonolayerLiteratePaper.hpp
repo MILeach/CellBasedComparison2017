@@ -69,13 +69,22 @@
 
 /*
  *  This is where you can set parameters to be used in all the simulations.
+ *
+ *  The first block (commented out) are the original parameter values.
+ *  The second block are parameters for a much shorter simulation, and are used for continuous testing with Chaste.
  */
 
-static const double M_TIME_FOR_SIMULATION = 100; //100
-static const double M_NUM_CELLS_ACROSS = 10; // 10
+//static const double M_TIME_FOR_SIMULATION = 100; //100
+//static const double M_NUM_CELLS_ACROSS = 10; // 10
+//static const double M_UPTAKE_RATE = 0.01; // S in paper
+//static const double M_DIFFUSION_CONSTANT = 1e-4; // D in paper
+//static const double M_DUDT_COEFFICIENT = 1.0; // Not used in paper so 1
+
+static const double M_TIME_FOR_SIMULATION = 1.0;
+static const double M_NUM_CELLS_ACROSS = 10;
 static const double M_UPTAKE_RATE = 0.01; // S in paper
 static const double M_DIFFUSION_CONSTANT = 1e-4; // D in paper
-static const double M_DUDT_COEFFICIENT = 1.0; // Not used in paper so 1
+static const double M_DUDT_COEFFICIENT = 1.0;
 
 class TestMorphogenMonolayerLiteratePaper : public AbstractCellBasedWithTimingsTestSuite
 {

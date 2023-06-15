@@ -67,11 +67,20 @@
 #include "Warnings.hpp"
 
 /*
- *  This is where you can set parameters toi be used in all the simulations.
+ *  This is where you can set parameters to be used in all the simulations.
+ *
+ *  The first block (commented out) are the original parameter values.
+ *  The second block are parameters for a much shorter simulation, and are used for continuous testing with Chaste.
  */
 
-static const double M_END_STEADY_STATE = 100; //100
-static const double M_END_TIME = 1100; //1100
+//static const double M_END_STEADY_STATE = 100; //100
+//static const double M_END_TIME = 1100; //1100
+//static const double M_CRYPT_DIAMETER = 16;
+//static const double M_CRYPT_LENGTH = 12;
+//static const double M_CONTACT_INHIBITION_LEVEL = 0.8;
+
+static const double M_END_STEADY_STATE = 100.0;
+static const double M_END_TIME = 101.0;
 static const double M_CRYPT_DIAMETER = 16;
 static const double M_CRYPT_LENGTH = 12;
 static const double M_CONTACT_INHIBITION_LEVEL = 0.8;

@@ -67,12 +67,20 @@
 
 /*
  *  This is where you can set parameters to be used in all the simulations.
+ *
+ *  The first block (commented out) are the original parameter values.
+ *  The second block are parameters for a much shorter simulation, and are used for continuous testing with Chaste.
  */
 
-static const double M_TIME_FOR_SIMULATION = 1000; //100
-static const double M_TISSUE_RADIUS = 15; // 15
-static const double M_PROLIF_RADIUS = 5; // 5
-static const double M_DIVISION_PROBABILITY = 0.1; // 0.1
+//static const double M_TIME_FOR_SIMULATION = 1000; //100
+//static const double M_TISSUE_RADIUS = 15; // 15
+//static const double M_PROLIF_RADIUS = 5; // 5
+//static const double M_DIVISION_PROBABILITY = 0.1; // 0.1
+
+static const double M_TIME_FOR_SIMULATION = 1.0;
+static const double M_TISSUE_RADIUS = 15;
+static const double M_PROLIF_RADIUS = 5;
+static const double M_DIVISION_PROBABILITY = 0.1;
 
 class TestDeltaNotchLiteratePaper: public AbstractCellBasedWithTimingsTestSuite
 {
