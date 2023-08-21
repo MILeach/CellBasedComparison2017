@@ -115,7 +115,7 @@ public:
         unsigned domain_wide = 2*M_NUM_CELLS_ACROSS;
 
         PottsMeshGenerator<2> generator(domain_wide, 0, 0, domain_wide, 0, 0);
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
 
         p_mesh->Translate(-(double)domain_wide*0.5 + 0.5,-(double)domain_wide*0.5 + 0.5);
 
@@ -197,7 +197,7 @@ public:
         unsigned element_size = 4;
         unsigned domain_size = M_NUM_CELLS_ACROSS * element_size * 3; // Three times the initial domain size
         PottsMeshGenerator<2> generator(domain_size, M_NUM_CELLS_ACROSS, element_size, domain_size, M_NUM_CELLS_ACROSS, element_size);
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
 
         // Create cells
         std::vector<CellPtr> cells;
@@ -275,7 +275,7 @@ public:
     {
         // Create a simple mesh
         HoneycombMeshGenerator generator(M_NUM_CELLS_ACROSS, M_NUM_CELLS_ACROSS, 0);
-        TetrahedralMesh<2,2>* p_generating_mesh = generator.GetMesh();
+        boost::shared_ptr<TetrahedralMesh<2,2> > p_generating_mesh = generator.GetMesh();
 
 		//Extended to allow sorting for longer distances
         double cut_off_length = 2.5; 
@@ -354,7 +354,7 @@ public:
         // Create a simple mesh
         unsigned num_ghosts = 20;
         HoneycombMeshGenerator generator(M_NUM_CELLS_ACROSS, M_NUM_CELLS_ACROSS, num_ghosts);
-        MutableMesh<2,2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableMesh<2,2> > p_mesh = generator.GetMesh();
 
         // Set up cells, one for each non ghost Node
         std::vector<unsigned> location_indices = generator.GetCellLocationIndices();
@@ -425,7 +425,7 @@ public:
     {
         // Create a simple 2D MutableVertexMesh
         HoneycombVertexMeshGenerator generator(M_NUM_CELLS_ACROSS, M_NUM_CELLS_ACROSS);
-        MutableVertexMesh<2,2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableVertexMesh<2,2> > p_mesh = generator.GetMesh();
         p_mesh->SetCellRearrangementThreshold(0.1);
 
         // Slows things down but can use a larger timestep and diffusion forces
