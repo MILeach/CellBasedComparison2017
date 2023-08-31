@@ -134,7 +134,7 @@ public:
     {
         // Create a simple 2D PottsMesh (periodic in x)
         PottsMeshGenerator<2> generator(M_CRYPT_DIAMETER, 0, 0, M_CRYPT_LENGTH*3, 0, 0, 1, 0, 0, false, true);
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
 
         // Specify where cells lie
         std::vector<unsigned> location_indices;
@@ -206,7 +206,7 @@ public:
 
         // Create a simple 2D PottsMesh (periodic in x)
         PottsMeshGenerator<2> generator( M_CRYPT_DIAMETER*cell_width, M_CRYPT_DIAMETER, cell_width, (M_CRYPT_LENGTH+2)*cell_width, M_CRYPT_LENGTH, cell_width, 1, 1, 1, true, true); //Dtart from bottom left and periodic
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
 
         // Create cells
         std::vector<CellPtr> cells;
@@ -286,7 +286,7 @@ public:
     {
         // Create a simple mesh
         HoneycombMeshGenerator generator(M_CRYPT_DIAMETER, M_CRYPT_LENGTH, 0);
-        TetrahedralMesh<2,2>* p_generating_mesh = generator.GetMesh();
+        boost::shared_ptr<TetrahedralMesh<2,2> > p_generating_mesh = generator.GetMesh();
 
         double cut_off_length = 1.5; //this is the default
 
@@ -372,7 +372,7 @@ public:
         unsigned thickness_of_ghost_layer = 2;
 
         CylindricalHoneycombMeshGenerator generator(M_CRYPT_DIAMETER, M_CRYPT_LENGTH, thickness_of_ghost_layer);
-        Cylindrical2dMesh* p_mesh = generator.GetCylindricalMesh();
+        boost::shared_ptr<Cylindrical2dMesh> p_mesh = generator.GetCylindricalMesh();
 
         // Get location indices corresponding to real cells
         std::vector<unsigned> location_indices = generator.GetCellLocationIndices();
@@ -444,7 +444,7 @@ public:
     {
         // Create mesh
         CylindricalHoneycombVertexMeshGenerator generator(M_CRYPT_DIAMETER, M_CRYPT_LENGTH, true);
-        Cylindrical2dVertexMesh* p_mesh = generator.GetCylindricalMesh();
+        boost::shared_ptr<Cylindrical2dVertexMesh> p_mesh = generator.GetCylindricalMesh();
         p_mesh->SetCellRearrangementThreshold(0.1);
 
         // Create cells

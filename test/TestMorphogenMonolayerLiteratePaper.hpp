@@ -142,7 +142,7 @@ public:
         unsigned domain_wide = 20*M_NUM_CELLS_ACROSS;
 
         PottsMeshGenerator<2> generator(domain_wide, 0, 0, domain_wide, 0, 0);
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
 
         p_mesh->Translate(-(double)domain_wide*0.5 + 0.5,-(double)domain_wide*0.5 + 0.5);
 
@@ -219,7 +219,7 @@ public:
         unsigned cell_width = 4;
         unsigned domain_width = M_NUM_CELLS_ACROSS*cell_width*20;
         PottsMeshGenerator<2> generator(domain_width, 2*M_NUM_CELLS_ACROSS, cell_width, domain_width, 2*M_NUM_CELLS_ACROSS, cell_width);
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
 
         p_mesh->Translate(-(double)domain_width*0.5+0.5,-(double)domain_width*0.5+0.5);
 
@@ -302,7 +302,7 @@ public:
     void TestNodeBasedMorphogenMonolayer()
     {
         HoneycombMeshGenerator generator(2.0*M_NUM_CELLS_ACROSS, 3.0*M_NUM_CELLS_ACROSS,0);
-        MutableMesh<2,2>* p_generating_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableMesh<2,2> > p_generating_mesh = generator.GetMesh();
 
         p_generating_mesh->Translate(-M_NUM_CELLS_ACROSS,-sqrt(3.0)*M_NUM_CELLS_ACROSS);
 
@@ -375,7 +375,7 @@ public:
     void TestMeshBasedMorphogenMonolayer()
     {
         HoneycombMeshGenerator generator(2.0*M_NUM_CELLS_ACROSS,3.0*M_NUM_CELLS_ACROSS);
-        MutableMesh<2,2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableMesh<2,2> > p_mesh = generator.GetMesh();
 
         p_mesh->Translate(-(double)M_NUM_CELLS_ACROSS*0.5,-sqrt(3)*M_NUM_CELLS_ACROSS);
 
@@ -448,7 +448,7 @@ public:
     {
         // Create Mesh
         HoneycombVertexMeshGenerator generator(2.0*M_NUM_CELLS_ACROSS, 3.0*M_NUM_CELLS_ACROSS);
-        MutableVertexMesh<2,2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableVertexMesh<2,2> > p_mesh = generator.GetMesh();
         p_mesh->SetCellRearrangementThreshold(0.1);
 
         p_mesh->Translate(-M_NUM_CELLS_ACROSS,-sqrt(3.0)*M_NUM_CELLS_ACROSS+ sqrt(3.0)/6.0);

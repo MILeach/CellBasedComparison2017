@@ -132,7 +132,7 @@ public:
         // Create a simple 2D PottsMesh
         unsigned domain_wide = 3*M_TISSUE_RADIUS;
         PottsMeshGenerator<2> generator(domain_wide, 0, 0, domain_wide, 0, 0);
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
 
         p_mesh->Translate(-(double)domain_wide*0.5 + 0.5,-(double)domain_wide*0.5 + 0.5);
 
@@ -200,7 +200,7 @@ public:
         unsigned element_size = 4;
         unsigned domain_size = (unsigned) (2.5*M_TISSUE_RADIUS * element_size); // larger than the circle.
         PottsMeshGenerator<2> generator(domain_size, 2*M_TISSUE_RADIUS, element_size, domain_size, 2*M_TISSUE_RADIUS, element_size);
-        PottsMesh<2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<PottsMesh<2> > p_mesh = generator.GetMesh();
         p_mesh->Translate(-0.5*(double)domain_size,-0.5*(double)domain_size);
 
         // Create cells
@@ -273,7 +273,7 @@ public:
         // Create a simple mesh
         unsigned num_ghosts = 0;
         HoneycombMeshGenerator generator(2*M_TISSUE_RADIUS, 2.5*M_TISSUE_RADIUS, num_ghosts);
-        MutableMesh<2,2>* p_generating_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableMesh<2,2> > p_generating_mesh = generator.GetMesh();
         p_generating_mesh->Translate(-M_TISSUE_RADIUS,-M_TISSUE_RADIUS);
 
         double cut_off_length = 1.0;
@@ -339,7 +339,7 @@ public:
         // Create a simple mesh
         unsigned num_ghosts = 0;
         HoneycombMeshGenerator generator(2*M_TISSUE_RADIUS, 2.5*M_TISSUE_RADIUS, num_ghosts);
-        MutableMesh<2,2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableMesh<2,2> > p_mesh = generator.GetMesh();
         p_mesh->Translate(-M_TISSUE_RADIUS,-M_TISSUE_RADIUS);
 
         // Set up cells, one for each non ghost Node
@@ -401,7 +401,7 @@ public:
     {
         // Create a simple 2D MutableVertexMesh
         HoneycombVertexMeshGenerator generator(2*M_TISSUE_RADIUS,2.5*M_TISSUE_RADIUS);
-        MutableVertexMesh<2,2>* p_mesh = generator.GetMesh();
+        boost::shared_ptr<MutableVertexMesh<2,2> > p_mesh = generator.GetMesh();
         p_mesh->SetCellRearrangementThreshold(0.1);
         p_mesh->Translate(-M_TISSUE_RADIUS,-M_TISSUE_RADIUS);
 
