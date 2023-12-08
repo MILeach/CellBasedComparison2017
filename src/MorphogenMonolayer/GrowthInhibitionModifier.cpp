@@ -68,15 +68,6 @@ template<unsigned DIM>
 void GrowthInhibitionModifier<DIM>::UpdateCellData(AbstractCellPopulation<DIM,DIM>& rCellPopulation)
 {
     rCellPopulation.Update(); // Make sure the cell population is updated
-
-    // Get volume for each cell
-    for (typename AbstractCellPopulation<DIM>::Iterator pCell = rCellPopulation.Begin();
-         pCell != rCellPopulation.End();
-         ++pCell)
-    {
-        pCell->GetCellData()->SetItem("growth inhibited", 0.0);
-    }
-    
     
     // Get volume for each cell
     for (typename AbstractCellPopulation<DIM>::Iterator pCell = rCellPopulation.Begin();
@@ -116,6 +107,7 @@ void GrowthInhibitionModifier<DIM>::OutputSimulationModifierParameters(out_strea
 }
 
 // Explicit instantiation
+template class GrowthInhibitionModifier<2>;
 template class GrowthInhibitionModifier<3>;
 
 // Serialization for Boost >= 1.36

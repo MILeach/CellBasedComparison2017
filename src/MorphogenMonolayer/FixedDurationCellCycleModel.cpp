@@ -57,9 +57,17 @@ FixedDurationCellCycleModel::FixedDurationCellCycleModel()
   mLastCellAge = 0.0;
 }
 
+void FixedDurationCellCycleModel::ResetForDivision()
+{
+    AbstractCellCycleModel::ResetForDivision();
+    mCurrentCellCyclePhase = G_ONE_PHASE;
+    mPhaseTimer = 0.0;
+    mLastCellAge = 0.0;
+}
+
 void FixedDurationCellCycleModel::SetPhaseDurations()
 {
-    SetStemCellG1Duration(7.0);
+    SetStemCellG1Duration(7.0);  
     SetTransitCellG1Duration(7.0);
     SetSDuration(6.0);
     SetG2Duration(3.0);
@@ -88,17 +96,19 @@ void FixedDurationCellCycleModel::SetPhaseTimer(const double value) {
 
 bool FixedDurationCellCycleModel::ReadyToDivide() {
     assert(mpCell != nullptr);
-
+    
     if (!mReadyToDivide)
     {
         UpdateCellCyclePhase();
         if ((mCurrentCellCyclePhase != G_ZERO_PHASE) &&
             (mPhaseTimer >= GetMDuration() + GetG1Duration() + GetSDuration() + GetG2Duration()) &&
-            !mpCell->GetCellData()->GetItem("growth inhibited")) 
+            (mCurrentCellCyclePhase == M_PHASE)) 
         {
             mReadyToDivide = true;
         }
     }
+
+    mpCell->GetCellData()->SetItem("growth inhibited", 0.0);
     return mReadyToDivide;
 }
 
@@ -119,14 +129,12 @@ void FixedDurationCellCycleModel::UpdateCellCyclePhase()
     }
     else if (mPhaseTimer < GetG1Duration())
     {
-        if (!mpCell->GetCellData()->GetItem("growth inhibited")) {
-            mCurrentCellCyclePhase = G_ONE_PHASE;
-        } else {
-            std::cout << "Cell inhibited\n";
-            if (mCurrentCellCyclePhase != G_ONE_PHASE) {
-                mPhaseTimer -= change_in_cell_age;
-            }
+        if (mpCell->GetCellData()->GetItem("growth inhibited") != 0.0) {
+            //std::cout << "Cell inhibited\n";
+            mPhaseTimer -= change_in_cell_age;
+            return;
         }
+        mCurrentCellCyclePhase = G_ONE_PHASE;
     }
     else if (mPhaseTimer <  GetG1Duration() + GetSDuration())
     {
@@ -134,14 +142,12 @@ void FixedDurationCellCycleModel::UpdateCellCyclePhase()
     }
     else if (mPhaseTimer < GetG1Duration() + GetSDuration() + GetG2Duration())
     {
-        if (!mpCell->GetCellData()->GetItem("growth inhibited")) {
-            mCurrentCellCyclePhase = G_TWO_PHASE;
-        } else {
-            std::cout << "Cell inhibited\n";
-            if (mCurrentCellCyclePhase != G_TWO_PHASE) {
-                mPhaseTimer -= change_in_cell_age;
-            }
+        if (mpCell->GetCellData()->GetItem("growth inhibited") != 0.0) {
+            //std::cout << "Cell inhibited\n";
+            mPhaseTimer -= change_in_cell_age;
+            return;
         }
+        mCurrentCellCyclePhase = G_TWO_PHASE;
     }
     else if (mPhaseTimer < GetG1Duration() + GetSDuration() + GetG2Duration() + GetMDuration())
     {

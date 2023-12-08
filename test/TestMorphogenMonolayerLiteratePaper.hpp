@@ -84,8 +84,8 @@
 //static const double M_DIFFUSION_CONSTANT = 1e-4; // D in paper
 //static const double M_DUDT_COEFFICIENT = 1.0; // Not used in paper so 1
 
-static const double M_TIME_FOR_SIMULATION = 360.0;
-static const double M_NUM_CELLS_ACROSS = 5;
+static const double M_TIME_FOR_SIMULATION = 310.0;
+static const double M_NUM_CELLS_ACROSS = 57;
 static const double M_UPTAKE_RATE = 0.01; // S in paper
 static const double M_DIFFUSION_CONSTANT = 1e-4; // D in paper
 static const double M_DUDT_COEFFICIENT = 1.0;
@@ -112,7 +112,8 @@ private:
             p_cell->SetCellProliferativeType(p_transit_type);
 
             // Note the first few recorded ages will be too short as cells start with some mass.
-            const double birth_time = -RandomNumberGenerator::Instance()->ranf() * 18.0;
+            //const double birth_time = -RandomNumberGenerator::Instance()->ranf() * 18.0;
+            const double birth_time = -20;
             p_cell->SetBirthTime(birth_time);
             p_cycle_model->SetPhaseTimer(birth_time);
 
@@ -194,7 +195,7 @@ public:
 
         OffLatticeSimulation<2> simulator(cell_population);
         simulator.SetOutputDirectory("MorphogenMonolayer/Node");
-        simulator.SetDt(0.005);
+        simulator.SetDt(0.05);
         simulator.SetSamplingTimestepMultiple(20);
         simulator.SetEndTime(M_TIME_FOR_SIMULATION);
 

@@ -60,6 +60,8 @@ public:
     AbstractCellCycleModel* CreateCellCycleModel() override;
     
     bool ReadyToDivide() override;
+
+    void ResetForDivision() override;
     
     // Override to start phase from G1
     void UpdateCellCyclePhase() override;

@@ -38,13 +38,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 template<unsigned ELEMENT_DIM, unsigned SPACE_DIM>
 GeneralisedLinearSpringForceWithMinDistanceItem<ELEMENT_DIM,SPACE_DIM>::GeneralisedLinearSpringForceWithMinDistanceItem()
    : AbstractTwoBodyInteractionForce<ELEMENT_DIM,SPACE_DIM>(),
-     mMeinekeSpringStiffness(15.0),        // denoted by mu in Meineke et al, 2001 (doi:10.1046/j.0960-7722.2001.00216.x)
+     mMeinekeSpringStiffness(5.0),        // denoted by mu in Meineke et al, 2001 (doi:10.1046/j.0960-7722.2001.00216.x)
      mMeinekeDivisionRestingSpringLength(0.5),
      mMeinekeSpringGrowthDuration(1.0)
 {
     if (SPACE_DIM == 1)
     {
-        mMeinekeSpringStiffness = 30.0;
+        mMeinekeSpringStiffness = 5.0;
     }
 }
 
@@ -150,6 +150,8 @@ c_vector<double, SPACE_DIM> GeneralisedLinearSpringForceWithMinDistanceItem<ELEM
     if (compression > 0.2 * node_a_radius) {
         p_cell_A->GetCellData()->SetItem("growth inhibited", 1.0);
     }
+
+
     if (compression > 0.2 * node_b_radius) {
         p_cell_B->GetCellData()->SetItem("growth inhibited", 1.0);
     }
