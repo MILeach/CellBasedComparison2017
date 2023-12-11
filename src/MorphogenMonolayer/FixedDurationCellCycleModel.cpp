@@ -153,6 +153,8 @@ void FixedDurationCellCycleModel::UpdateCellCyclePhase()
     {
         mCurrentCellCyclePhase = M_PHASE;
     }
+
+    mpCell->GetCellData()->SetItem("cell age", mPhaseTimer);
 }
 
 #include "SerializationExportWrapperForCpp.hpp"
