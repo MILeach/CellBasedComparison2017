@@ -30,6 +30,7 @@
 #include "CellAgesWriter.hpp"
 #include "VoronoiDataWriter.hpp"
 #include "CellMutationStatesWriter.hpp"
+#include "TissueWidthWriter.hpp"
 
 #include "ParabolicGrowingDomainPdeModifier.hpp"
 #include "MorphogenCellwiseSourceParabolicPde.hpp"
@@ -84,7 +85,7 @@
 //static const double M_DIFFUSION_CONSTANT = 1e-4; // D in paper
 //static const double M_DUDT_COEFFICIENT = 1.0; // Not used in paper so 1
 
-static const double M_TIME_FOR_SIMULATION = 310.0;
+static const double M_TIME_FOR_SIMULATION = 1440.0;
 static const double M_NUM_CELLS_ACROSS = 57;
 static const double M_UPTAKE_RATE = 0.01; // S in paper
 static const double M_DIFFUSION_CONSTANT = 1e-4; // D in paper
@@ -124,31 +125,12 @@ private:
             p_cell->GetCellData()->SetItem("target area", 1.0);
             p_cell->GetCellData()->SetItem("growth inhibited", 0.0);
             p_cell->GetCellData()->SetItem("Radius", 0.1);
+            p_cell->GetCellData()->SetItem("cell age", birth_time);
             rCells.push_back(p_cell);
         }
      }
 
 public:
-
-    /*
-     * == CA ==
-     *
-     * Simulate reaction diffusion on a growing a population of cells in the
-     * Cellular Automaton model.
-     */
-    void TestCaBasedMorphogenMonolayer()
-    {
-    }
-
-    /*
-     * == CP ==
-     *
-     * Simulate reaction diffusion on a growing a population of cells in the
-     * Cellular Potts model.
-     */
-    void TestPottsBasedMorphogenMonolayer()
-    {
-    }
 
     /*
      * == OS ==
@@ -191,6 +173,7 @@ public:
         cell_population.AddCellWriter<CellAgesWriter>();
         cell_population.AddCellWriter<CellMutationStatesWriter>();
         cell_population.AddCellWriter<CellVolumesWriter>();
+        cell_population.AddPopulationWriter<TissueWidthWriter>();
         cell_population.SetUseVariableRadii(true);
 
         OffLatticeSimulation<2> simulator(cell_population);
@@ -203,7 +186,7 @@ public:
 
         // Create a force law and pass it to the simulation
         MAKE_PTR(GeneralisedLinearSpringForceWithMinDistanceItem<2>, p_linear_force);
-        p_linear_force->SetMeinekeSpringStiffness(1.00);
+        p_linear_force->SetMeinekeSpringStiffness(5.00);
         p_linear_force->SetCutOffLength(cut_off_length);
         simulator.AddForce(p_linear_force);
         
@@ -214,6 +197,7 @@ public:
         simulator.Solve();
 
         delete p_mesh; // to stop memory leaks
+
     }
 
     /*
